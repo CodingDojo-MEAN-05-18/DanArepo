@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Epic Button Click GAME!!!!</title>
+
+    <script src = "/socket.io/socket.io.js"></script>
+    <script>
+       var socket = io();
+
+       function add() {
+         socket.emit('clickEvent', 'I pressed a button!!!!');
+       };
+
+       function reset() {
+         socket.emit('reset', 'I pressed reset!!!!!');
+       };
+
+       socket.on('broadcast', function(data){
+         document.getElementById('score').innerHTML =
+         'The button has been pressed ' +
+         data.number +
+         ' times!!!!'
+       });
+
+    </script>
+
+  </head>
+  <body>
+    <div id='score'>
+
+    </div>
+    <div>
+      <h1>Press the button to update the count</h1>
+    </div>
+    <button onclick='add()'>Click ME!!!</button>
+    <button onclick='reset()'>Reset</button>
+  </body>
+</html>

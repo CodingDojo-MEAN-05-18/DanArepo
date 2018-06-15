@@ -1,0 +1,10 @@
+<form action="/mongoose/edit/<%= data[0]._id %>" method="post">
+    Name: <input type="text" name="name" id="" value='<%= data[0].name %>'><br>
+    Age: <input type="number" name="age" id="" value='<%= data[0].age %>'><br>
+    Can it dance? <%= data[0].canDance %> <br>
+    Can it still dance?<input type="checkbox" name="canDance" id="" value='true'>Yes 
+    <input type='checkbox' name='canDance' value='false'>No<br>
+    <input type="submit" value="Edit">
+</form>
+<form action="/mongoose/destroy/<%= data[0]._id %>" method="post">
+<input type="submit" value="DESTROY!!!!!!!!!!!!!"></form>

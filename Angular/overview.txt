@@ -1,0 +1,48 @@
+installation
+//npm i -g @angular/cli 
+
+create an angular app
+//ng new nameOfApp
+
+change to that dir
+//cd appName
+
+generate components, directives, services, and pipes
+//ng generate component myComponent - creates a component called myComponent
+//ng generate service myService - creates a service called myService
+//ng generate class myClass - creates a class called myClass 
+
+launching the app 
+//ng serve 
+
+angular will tell us that it is running on what port,  usually 4200
+
+include some popular mods
+FormsModule - utilized for angular forms 
+HttpModule - utilized for angular http requests to any api 
+
+in ../src/app/app.modules.ts with imports
+when importing new mods, ensure you import them from the specific library as shown above, and then incluse the imported modules within the imports array
+/**
+ 
+import { NgModule } from '@angular/core'; 
+import { BrowserModule } from '@angular/platform-browser'; 
+import { AppComponent } from './app.component'; 
+import { FormsModule } from '@angular/forms'; // <-- Import FormsModule
+import { HttpModule } from '@angular/http'; // <-- Import HttpModule
+@NgModule({ 
+	declarations: [ 
+		AppComponent
+	], 
+	imports: [
+		BrowserModule,
+		FormsModule, // <-- Include module in our AppModules
+		HttpModule // <-- Include module in our AppModules
+	], 
+	providers: [], 
+	bootstrap: [AppComponent] 
+}) 
+export class AppModule { }
+
+**/
+

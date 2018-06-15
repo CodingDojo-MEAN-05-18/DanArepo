@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Trivia</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $.get('https://opentdb.com/api.php?amount=10&category=23&difficulty=medium&type=multiple', displayData);
+        function displayData(data) {
+          console.log(data);
+          for(let i = 0; i < data.results.length; i++){
+            $('body').append('<p>', data.results[i].question, '</p>');
+            $('body').append('<ul>');
+            for (let j = 0; j < data.results[i].incorrect_answers.length; j++){
+              $('body').append('<li>' + data.results[i].incorrect_answers[j] + '</li>');
+            };
+            $('body').append('<li>' + data.results[i].correct_answer + '</li>');
+            $('body').append('</ul>');
+          };
+        };
+      });
+    </script>
+  </head>
+  <body>
+    <p></p>
+  </body>
+</html>

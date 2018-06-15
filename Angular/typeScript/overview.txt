@@ -1,0 +1,93 @@
+typeScript
+
+basic typeScript var typeScript
+characters - string
+numbers - number
+true/false - boolean
+
+array - varType[] or Array<varType>
+
+anything - any 
+
+Variable declarations
+
+var - used within whatever scoped it is placed and accessible to children
+
+let - used to limit scope to the area it is instantiated only
+
+const - -cannot be changed once set
+
+Functions and Classes 
+
+never - this function will never reach the end of the function
+function functionName(message: string): never{
+    throw new Error(message);
+}
+
+void - returns nothing, only runs code within
+function whatev(message: string): void{
+    console.log(message);
+    return; - may not be neccessary
+}
+
+Classes
+
+class name{
+    val: number;
+    constructor(valueP: number){
+        this.val = valueP;
+    }
+    dosomething(){
+        console.log('lol');
+    }
+}
+let firstSLNode = new name(1);
+
+Modules
+Imports
+import * from 'libraryname'; - imports everything from the libraryname 
+import { specific object} from 'filepath/library'; - import just the object from library 
+import { a, b } from 'filepath/library'; - import a and b from library 
+
+import * from 'rxjs'; - imports rxjs to be used in your app 
+import observable from 'rxjs/observable'; - only observable will be imported from the library
+
+Exports
+export class sampleClass{
+    sampleMethod(str: string): number{
+        return str.length();
+    }
+}
+- or -
+class sampleClass{
+    sampleMethod(str: string): number{
+        return str.length();
+    }
+}
+export { sampleClass as newClassName }
+- or -
+export {sampleClass}
+- can have multiple exports per line - 
+
+Interfaces
+basic code
+
+interface UI{
+    name: string;
+}
+function printName(user: UI): void{
+    console.log(user.name);
+    return;
+}
+
+Optional data 
+
+interface UI{
+    name: string;
+    cell?: number;
+}
+function printName(user: UI): void{
+    console.log(user.name):
+    if(user.cell){ console.log(user.cell)};
+    return;
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Group Chat</title>
+    <script src = "/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        var socket = io();
+        var userID = '' ;
+        var username = '';
+        $('document').ready(function(){
+            socket.on('updateUserList', function(data){
+                console.log('user list updated: ' + data.users);
+                document.getElementById('usersDiv').innerHTML = '<ul>';
+                for( let i = 0; i < data.users.length; i++){
+                    document.getElementById('usersDiv').innerHTML += 
+                    '<li>' + data.users[i] + '</li>';
+                }
+                document.getElementById('usersDiv').innerHTML += '</ul>';
+            });
+
+            socket.on('updateText', function(data){
+                console.log('User: ' + data.user + ' msg received: ' + data.text);
+                document.getElementById('textBoard').innerHTML += data.user + ': ' + data.text + '<br>';
+            });
+
+            socket.on('Error', function(data){
+                alert(data.error);
+            });
+
+            socket.on('newUserCreated', function(data){
+                console.log('User: ' + data.username + '; UserID: ' + data.userID);
+                userID = data.userID;
+                username = data.username;
+                $('#nuDiv').fadeOut(function(){
+                    $('#convoDiv').fadeIn();
+                });
+            });
+        });
+
+        function newUser(){
+            var user = document.getElementById('newUser');
+            if( user.value !== ''){
+                console.log('new user: ' + user.value);
+                socket.emit('newUserIncoming', {user: user.value});
+            }else{
+                alert('you need a username');
+            }
+        };
+
+        function cancel(){
+            console.log('cancel');
+            $('#nuDiv').fadeOut(function(){
+                $('#textIn').hide();
+                $('#sendBtn').hide();
+                $('#convoDiv').fadeIn();
+            }); 
+        };
+
+        function sendText(){
+            var text = document.getElementById('textIn');
+            console.log('send text');
+            socket.emit('textIncoming', {user: username, text: text.value});
+            text.value = '';
+        };
+
+    </script>
+</head>
+<body>
+    <div id='nuDiv'>
+        <fieldset>
+            <legend>Enter your username</legend>
+            <input id='newUser' type="text"><br>
+            <button onclick='cancel()'>Cancel</button><button onclick='newUser()'>OK</button>
+        </fieldset>
+    </div>
+    <div id='convoDiv' style='display: none'>
+        <div id='usersDiv' style='display:inline-block; width: 200'></div>
+        <div style='display:inline-block'>
+            <fieldset>
+                <legend>Convo Board</legend>
+
+                <div id="textBoard" cols="50" rows="25"></div><br>
+                <input type="text" id='textIn'><button id='sendBtn' onclick='sendText()'>Send</button>
+            </fieldset>
+        </div>
+    </div>
+</body>
+</html>

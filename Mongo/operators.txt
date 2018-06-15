@@ -1,0 +1,31 @@
+operators to help with stuff
+
+find operators
+$gt = greater than
+$gte = greater than or equal to 
+$lt = less than 
+$lte = less than or equal to 
+$in = in array use to find docs who have a particular value within an array 
+
+example collections
+{name: 'Dan'}
+{name: 'Jim'}
+//db.ninjas.find({name: {$in ['Dan', 'Jim']} })
+will return all collections where 'name' equals 'Dan' or 'Jim'
+
+collection operations
+$push = add an item to an array
+//db.ninjas.update({name: 'Dan'}, {$push:{interests: 'Illustration'}})
+
+$pop = remove the last item (1) or the first (-1) from an array 
+//db.ninjas.update({name:'Dan'}, {$pop: {interests: 1}})
+
+$addToSet = works like push but only adds to the array if it doesn't already exist
+//db.ninjas.update({name:'Dan'},{$addToSet:{interests:'Illustration'}}) 
+- won't add anything
+//db.ninjas.update({name:'Dan'},{$addToSet:{interests:'Fast cars'}}) 
+- will add 'Fast cars' to array 'interests'
+
+$pull = removes a specified value from an array, uses a match case instead of the first or last index
+//db.ninjas.update({name:'Dan'}, {$pull:{interests:'Illustration'}}) 
+- this will remove 'Illustration if it's there

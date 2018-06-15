@@ -1,0 +1,32 @@
+Document CRUD operations
+
+get into your db
+//use (db)
+
+make a collection
+//db.createCollection('ninjas')
+
+insert a collection(JSON Object)
+//db.ninjas.insert({name: 'Dan'})
+
+insert another collection 
+//db.ninjas.insert({name: 'Jim', wisdom: true})
+
+they don't have to be the same bc mongo is cool like that
+
+find a collection
+//db.ninjas.find({name: 'Dan'}) 
+//db.ninjas.find({name: 'Jim'})
+
+no it doesn't need all params filled in to find
+
+remove a collection 
+//db.ninjas.remove({name: 'jim'})
+
+modify a collection 
+//db.ninjas.update({name: 'Dan'}, {location: 'Mtn View'})
+but this will replace all info in the collection to what you change it to, except the id
+in this case this collection will only hold '{location: 'Mtn View'})
+
+//db.ninjas.update({name: 'Dan'}, {$set: {location:'Mtn View'}})
+now it will add to the collection instead of overwrite it

@@ -1,0 +1,101 @@
+ //Install Node.js from the website
+
+ //check its installed in powershell
+ node -v
+
+ //check npm is installed too
+
+ npm -v
+
+ //install nodemon, bower, and jquery
+
+ npm install -g nodemon
+ npm install -g bower
+ bower install jquery
+ npm install jquery
+
+ //create a folder to hold your stuff
+ //create app.js or whatever
+
+ cd (go to folder)
+ nul> app.js
+
+ //add in this code
+***************************************
+ // get the http module:
+var http = require('http');
+// fs module allows us to read and write content for responses!!
+var fs = require('fs');
+// creating a server using http module:
+var server = http.createServer(function (request, response){
+    // see what URL the clients are requesting:
+    console.log('client request URL: ', request.url);
+    // this is how we do routing:
+    if(request.url === '/') {
+        fs.readFile('index.html', 'utf8', function (errors, contents){
+            response.writeHead(200, {'Content-Type': 'text/html'});  // send data about response
+            response.write(contents);  //  send response body
+            response.end(); // finished!
+        });
+    }
+    // request didn't match anything:
+    else {
+        response.writeHead(404);
+        response.end('File not found!!!');
+    }
+});
+// tell your server which port to run on
+server.listen(6789);
+// print to terminal window
+console.log("Running in localhost at port 6789");
+*******************************************
+
+//create an index.html page in the same folder as app.js
+
+//test it with nodemon
+
+nodemon app.js
+
+///////////////////////////
+This line is crucial:
+
+var server = http.createServer(function (request, response){...})
+
+this creates the Server with a callback function that handles a request and response
+
+basically the user makes a request to the Server
+the server checks the request and makes a response if it can or sends back an error if something is wrong
+
+Configuring the root route:
+
+if(request.url === '/') {
+    fs.readFile('index.html', 'utf8', function (errors, contents){
+        response.writeHead(200, {'Content-Type': 'text/html'});
+        response.write(contents);
+        response.end();
+    });
+}
+
+
+//node modules
+
+allows you to pull code from other js files into this current file - beware circular dependencies
+
+//exporting a node
+
+app.js
+var my_mod = require('./my_mod') ();// no js at end // this is a directory starting from wherever app.js is located // if the mod is a function then it will need the () at the end of the require
+my_mod.greet(); // output will be message
+my_mod.add(5,6); // output will be 9
+
+my_mod.js
+module.exports = function() {
+  return {
+    greet: function(){
+      console.log('message');
+    },
+    add: function(num1, num2){
+      console.log(num1 + num2);
+    }
+  }
+}

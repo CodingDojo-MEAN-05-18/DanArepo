@@ -1,0 +1,9 @@
+<ul>
+    <% for (var i = 0; i < data.length; i++) { %>
+    <li><a href="/mongoose/<%= data[i]._id %>"><%= data[i].name %></a> - 
+        <%= data[i].age %> - 
+        Can it dance? <%= data[i].canDance %>
+    </li>
+    <% } %>
+</ul>
+<h1><a href="/newMongoose">Make a new Mongoose</a></h1>

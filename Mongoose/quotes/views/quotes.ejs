@@ -1,0 +1,9 @@
+<a href="/">Home</a>
+
+<% for (var i = 0; i < data.length; i++) { %>
+    <fieldset>
+        <legend><%= data[i].name %></legend>
+        <p><%= data[i].quote %></p><br>
+        <p>Quote made at <%= data[i].updatedAt %></p>
+    </fieldset>
+<% } %>

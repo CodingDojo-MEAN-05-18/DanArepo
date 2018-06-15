@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>GitHub Hunt</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $('button').click(function(){
+          $.get('https://api.github.com/users/verilyDA', displayName);
+          function displayName(data) {
+            $('p').text(data.login);
+          };
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <button>Click me</button>
+    <p></p>
+
+  </body>
+</html>

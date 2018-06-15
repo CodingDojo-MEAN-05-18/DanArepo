@@ -1,0 +1,40 @@
+SQL to Mongo
+
+database
+schema => Database(db) 
+collection of records 
+table => collections 
+singular record in collection of records 
+row/record => document 
+
+///basic database commands in mongo terminal 
+
+show all databases 
+//show dbs 
+
+show current database 
+//db 
+
+make new/change to another database 
+//use (db name goes here) 
+
+delete database 
+//use (db name goes here) 
+//db.dropDatabase() 
+
+///basic collection/table commands in mongo terminal
+///after you have already selected your database 
+
+view all collections 
+//show collections 
+
+create new collection 
+//db.createCollection("collection name")
+
+destroy collection 
+//db.(collection name).drop() 
+
+///basic document/row/record mongo terminal commands 
+
+there aren't any as mongo is meant to be as flexible as possible.
+all collections are JSON objects which can be modified on the fly

@@ -1,0 +1,13 @@
+using mongo
+
+start mongodb server:
+open bash and nav to 
+cd c/'program files'/mongodb/server/3.6/bin
+run mongod 
+./mongod 
+
+start the mongo terminal
+
+cd c/'program files'/mongodb/server/3.6/bin 
+./mongo 
+

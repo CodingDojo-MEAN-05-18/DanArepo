@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Colors</title>
+
+    <script src = "/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        var socket = io();
+        $('document').ready(function(){
+            socket.on('curBGcolor', function(data){
+                console.log('User bgColor: ' + data.color);
+                document.body.style.backgroundColor = data.color;
+            });
+
+            socket.on('updateAll', function(data){
+                console.log('updateAll ' + data.color);
+                document.body.style.backgroundColor = data.color;
+            });
+            
+        });
+        function red(){
+            socket.emit('redPressed', {color: 'red'});
+        };
+
+        function blue(){
+            socket.emit('bluePressed', {color: 'blue'});
+        };
+
+        function green(){
+            socket.emit('greenPressed', {color: 'green'});
+        };
+    </script>
+</head>
+<body id='body'>
+    <button onclick='red()'>red</button>
+    <button onclick='blue()'>blue</button>
+    <button onclick='green()'>green</button>
+</body>
+</html>

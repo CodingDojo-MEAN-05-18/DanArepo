@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Form</title>
+    <script src = "/socket.io/socket.io.js"></script>
+    <script>
+       var socket = io();
+
+       function btn1Click() {
+         var surveyData = {
+           name: document.getElementById('name').value,
+           loc: document.getElementById('loc').value,
+           lang: document.getElementById('lang').value,
+           com: document.getElementById('com').value,
+         }
+         socket.emit('clickEvent', surveyData);
+       }
+
+       socket.on('updated_message', function(data){document.getElementById('results').innerHTML =
+       'You emitted the following info to the server: ' +
+       JSON.stringify(data.description)});
+       socket.on('random_number', function(data){document.getElementById('results').innerHTML +=
+       '<br>Your lucky number is ' + data.number});
+    </script>
+  </head>
+  <body>
+    <div id="results">
+
+    </div>
+      Name: <input id='name' type="text" name="name" value="Name"><br>
+      Dojo Location: <input id='loc' type="text" name="loc" value="Location"><br>
+      Favorite Language: <input id='lang' type="text" name="lang" value="Java"><br>
+      Comment: <input id='com' type="textarea" name="com" value="Comment...."><br>
+      <button onclick='btn1Click()'>Submit</button>
+  </body>
+</html>
