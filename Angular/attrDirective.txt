@@ -1,0 +1,60 @@
+in general, angular css files only affect the html file they are paired with in component
+ie
+'app.component.css' => 'app.component.html'
+there is a workaround but its not stated here
+
+[ngStyle]
+in ts 
+//
+import { Component } from '@angular/core';
+@Component({ 
+  selector: 'app-root', 
+  templateUrl: './app.component.html', 
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent { 
+  color = 'red';
+}
+// 
+to html 
+//
+<span [ngStyle]="{
+  'background-color': color,
+  'font-weight': 'bold'
+}" >ngStyle w/Variable</span>
+//
+
+[ngClass]
+in css 
+//
+.red { background-color: red }
+.bold { font-weight: bold }
+//
+to html 
+//
+<span [ngClass]="{ 'red': true, 'bold': false }">I should be red but not bolded.</span>
+<span [ngClass]="{'red': true, 'bold': true }">I should be red and bolded.</span>
+//
+
+and now for something a bit more dynamic
+ts 
+//
+import { Component } from '@angular/core';
+@Component({ 
+  selector: 'app-root', 
+  templateUrl: './app.component.html', 
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent { 
+  switch: boolean = true;
+}
+//
+css 
+//
+.on { background-color: yellow; }
+//
+html 
+//
+<span [ngClass] = "{ 'on': switch }"> I shouyld be yellow </span>
+<span [ngClass] = "{ 'on': 1==1 }"> I should be Yellow. </span>
+//

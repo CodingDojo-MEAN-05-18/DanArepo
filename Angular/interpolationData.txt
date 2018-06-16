@@ -1,0 +1,47 @@
+Interpolation
+
+example ts
+//
+import { Component } from '@angular/core';
+@Component({ 
+	selector: 'app-root', 
+	templateUrl: './app.component.html', 
+	styleUrls: ['./app.component.css']
+})
+export class AppComponent { 
+	number = 10;
+	name = 'Bill Gates';
+	user = {
+		firstName: 'Darth',
+		lastName: 'Vader'
+	}
+}
+//
+example html
+//
+{{ name }}//Bill Gates
+{{ user.firstName }}//Darth
+{{ user.lastName }}//Vader 
+{{ 5 + 5 }}//10
+{{ number + 5 }}//15
+//
+
+Data Binding
+
+example ts
+//
+import { Component } from '@angular/core';
+@Component({ 
+	selector: 'app-root', 
+	templateUrl: './app.component.html', 
+	styleUrls: ['./app.component.css']
+})
+export class AppComponent { 
+	number = 10;
+}
+//
+example html 
+//
+<input [value]='number'> // will set the value property to 10
+<input value='number'> // will set the value property to 'number'
+//

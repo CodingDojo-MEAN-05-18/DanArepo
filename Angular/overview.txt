@@ -22,7 +22,8 @@ FormsModule - utilized for angular forms
 HttpModule - utilized for angular http requests to any api 
 
 in ../src/app/app.modules.ts with imports
-when importing new mods, ensure you import them from the specific library as shown above, and then incluse the imported modules within the imports array
+when importing new mods, ensure you import them from the specific library as shown 
+above, and then incluse the imported modules within the imports array
 /**
  
 import { NgModule } from '@angular/core'; 

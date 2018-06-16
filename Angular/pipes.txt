@@ -1,0 +1,39 @@
+Pipes
+[filters]
+
+example ts
+//
+import { Component } from '@angular/core';
+@Component({ 
+	selector: 'app-root', 
+	templateUrl: './app.component.html', 
+	styleUrls: ['./app.component.css']
+})
+export class AppComponent { 
+	user = {
+		firstName: 'Darth',
+		lastName: 'Vader'
+	}
+	amount = 1.20;
+	today = new Date();
+}
+//
+example html
+json - {{ user | json }} // result -> '{ "firstName": "Darth", "lastName": "Vader" }'
+
+uppercase - {{ user.firstName | uppercase }} // result -> 'DARTH'
+
+lowercase - {{ user.lastName | lowercase }} // result -> 'vader'
+
+currency - 
+{{ amount | currency }} // result -> USD1.20
+{{ amount | currency:'AUS' }} // result -> AUS1.20 (:'VAL' represents the type of currency)
+{{ amount | currency:'USD':true }} // result -> $1.20 (true/false determines the replacement of currency title to symbol)
+
+date - 
+{{ today | date:'fullDate' }} -> Tuesday, May 16, 2017 
+{{ today | date:'longDate' }} -> May 16, 2017 
+{{ today | date:'shortDate' }} -> 5/16/2017
+{{ today | date:'medium' }} -> May 16, 2017, 12:00:00 AM
+{{ today | date:'short' }} -> 5/16/2017, 12:00 AM
+
