@@ -20,6 +20,29 @@
 <div *ngFor='let colorbox of colorBar' [ngStyle]="{
   'background-color': colorbox
 }" style="
-height: 100px;
-width: 100px;
+padding: 25px;
 display: inline-block">{{ colorbox }}</div>
+<br>
+<br>
+<button (click)="onButtonClick([5, $event])">Button Test</button>
+<br>
+<br>
+<h1>US Time Zone Display</h1>
+<button (click)="onButtonClick('pst')">PST</button>
+<button (click)="onButtonClick('mst')">MST</button>
+<button (click)="onButtonClick('cst')">CST</button>
+<button (click)="onButtonClick('est')">EST</button>
+<button (click)="onButtonClick('clear')">Clear</button>
+<br>
+<br>
+<h1>{{ date | date:'short' }}</h1>
+
+<div *ngFor='let btn of btnBar' [ngStyle]="{
+  'background-color': colorState[btn]
+}" style="
+padding: 25px;
+display: inline-block"><button style='padding: 5px;' (click)="btnOnOff(btn)">{{ stateTxt[btn] }}</button></div>
+
+<app-form-test></app-form-test>
+
+<app-reg-form></app-reg-form>

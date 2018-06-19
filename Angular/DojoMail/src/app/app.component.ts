@@ -8,6 +8,67 @@ import { Component } from '@angular/core';
 export class AppComponent {
   data = [ billMail, adaMail, johnMail, gabeMail ];
   colorBar = [ randHex(), randHex(), randHex(), randHex(), randHex(), randHex(), randHex(), randHex(), randHex(), randHex() ];
+  date = new Date().toString();
+  btnBar = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ];
+  stateTxt = [ 'On', 'On', 'On', 'On', 'On', 'On', 'On', 'On', 'On', 'On' ];
+  colorState = [ 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green' ];
+  onButtonClick(data) {
+    console.log('button was clicked: ', data);
+    switch (data) {
+      case 'pst': {
+        console.log('PST was clicked');
+        this.date = new Date().toString();
+        break;
+      }
+      case 'mst': {
+        console.log('MST was clicked');
+        const time = new Date();
+        const curHour = time.getHours() + 1;
+        time.setHours(curHour);
+        console.log(time);
+        this.date = time.toString();
+        break;
+      }
+      case 'cst': {
+        console.log('CST was clicked');
+        const time = new Date();
+        const curHour = time.getHours() + 2;
+        time.setHours(curHour);
+        console.log(time);
+        this.date = time.toString();
+        break;
+      }
+      case 'est': {
+        console.log('EST was clicked');
+        const time = new Date();
+        const curHour = time.getHours() + 3;
+        time.setHours(curHour);
+        console.log(time);
+        this.date = time.toString();
+        break;
+      }
+      case 'clear': {
+        console.log('CLEAR was clicked');
+        this.date = new Date().toString();
+        break;
+      }
+    }
+  }
+  btnOnOff(data) {
+    console.log(data);
+    switch (this.stateTxt[data]) {
+      case ('On'): {
+        this.colorState[data] = 'red';
+        this.stateTxt[data] = 'Off';
+        break;
+      }
+      case ('Off'): {
+        this.colorState[data] = 'green';
+        this.stateTxt[data] = 'On';
+        break;
+      }
+    }
+  }
 }
 
 class Email {
@@ -64,3 +125,5 @@ function randHex(): string {
   }while ( n < 6 );
   return str;
 }
+
+

@@ -1,0 +1,17 @@
+<div class='container'>
+  <h1>Form Test</h1>
+  <form (submit)='onSubmit()'>
+    <div>
+      <label for="name">Name
+        <input
+        type="text"
+        name='name'
+        required
+        minlength="2"
+        maxlength="50"
+        [(ngModel)]='user.name'
+        #name='ngModel'></label></div>
+        <div><input type="submit" value="Submit"></div>
+  </form>
+</div>
+<div *ngFor='let user of users'>{{ user.name }}</div>

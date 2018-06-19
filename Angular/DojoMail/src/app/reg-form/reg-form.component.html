@@ -1,0 +1,129 @@
+<div id='container'>
+  <h1>Registration</h1>
+  <fieldset>
+    <legend>Account Information</legend>
+    <form (submit)='onSubmit()' name='form'>
+      <label for="first_name">*First Name:
+        <input type="text"
+        name="first_name"
+        required
+        minlength="2"
+        maxlength="24"
+        [(ngModel)]='model.first_name'
+        #first_name='ngModel' ></label>
+        <div *ngIf="first_name.invalid && (first_name.dirty || first_name.touched)"
+        class="alert alert-danger">
+          <div *ngIf="first_name.errors.required">
+            First Name is required.
+          </div>
+          <div *ngIf="first_name.errors.minlength">
+            First Name must be at least 2 characters long.
+          </div>
+        </div>
+<br>
+      <label for="last_name">*Last Name:
+        <input type="text"
+        name="last_name"
+        required
+        minlength='4'
+        maxlength='50'
+        [(ngModel)]='model.last_name'
+        #last_name='ngModel'></label>
+        <div *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)"
+        class="alert alert-danger">
+          <div *ngIf="last_name.errors.required">
+            Last Name is required.
+          </div>
+          <div *ngIf="last_name.errors.minlength">
+            Last Name must be at least 4 characters long.
+          </div>
+        </div>
+<br>
+      <label for="email">*Email:
+        <input type="email"
+        name="email"
+        required
+        minlength="6"
+        maxlength='255'
+        [(ngModel)]='model.email'
+        #email='ngModel' required></label>
+        <div *ngIf="email.invalid && (email.dirty || email.touched)"
+        class="alert alert-danger">
+          <div *ngIf="email.errors.required">
+            Email is required.
+          </div>
+          <div *ngIf="email.errors.minlength">
+            Email must be at least 4 characters long.
+          </div>
+        </div>
+<br>
+      <label for="password">*Password:
+        <input type="password"
+        name="password"
+        required
+        minlength='8'
+        maxlength='50'
+        pattern="^([a-zA-Z0-9@*#]{8,15})$"
+        [(ngModel)]='model.password'
+        #password='ngModel'></label>
+        <div *ngIf="password.invalid && (password.dirty || password.touched)"
+        class="alert alert-danger">
+          <div *ngIf="password.errors.required">
+            Password is required.
+          </div>
+          <div *ngIf="password.errors.minlength">
+            Password must be at least 4 characters long.
+          </div>
+        </div>
+<br>
+      <label for="passwordConfirm">*Confirm Password:
+        <input type="password"
+          name="passwordConfirm"
+          required
+          minlength='8'
+          maxlength='50'
+          pattern="^([a-zA-Z0-9@*#]{8,15})$"
+          [(ngModel)]='model.passwordConfirm'
+          #password='ngModel'></label>
+<br>
+      <label for="streetAddress">*Street Address:
+        <input type="text"
+        name="street_address"
+        required
+        minlength='8'
+        maxlength='50'
+        [(ngModel)]='model.street_address'
+        #street_address='ngModel'></label>
+<br>
+      <label for="unitApt">*Unit/Apt#:
+        <input type="text"
+        name="unit_apt"
+        [(ngModel)]='model.unit_apt'
+        #unit_apt='ngModel'></label>
+<br>
+      <label for="city">*City:
+        <input type="text"
+        name="city"
+        [(ngModel)]='model.city'
+        #city='ngModel' required></label>
+<br>
+      <label for="state">*State:
+        <select name="state" [(ngModel)]='model.state' required>
+        <option *ngFor='let state of states' [value]='state'>{{ state }}</select></label>
+<br>
+      <label for="lucky">*Are you feeling lucky?:
+        <input type="radio"
+        [(ngModel)]='model.lucky'
+        name="model.lucky" value="true" checked>YES!!!!
+        <input type="radio"
+        [(ngModel)]='model.lucky'
+        name="model.lucky" value="false">no....</label>
+<br>
+        <div *ngIf="(first_name.valid && last_name.valid && password.valid && email.valid && street_address.valid) && (first_name.dirty || first_name.touched)"
+          class="alert alert-danger">
+          <input type="submit">
+        </div>
+    </form>
+  </fieldset>
+</div>
+<div *ngFor='let model of models'>{{ model.first_name }} {{ model.last_name }} - successfully added</div>

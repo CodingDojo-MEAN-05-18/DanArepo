@@ -1,0 +1,9 @@
+input.ng-invalid {
+  color:red
+ }
+input.ng-valid {
+  color:green
+}
+.ng-pristine {
+  color:black
+ }
