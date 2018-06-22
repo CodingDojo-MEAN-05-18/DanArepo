@@ -1,0 +1,22 @@
+<div id='container'>
+  <fieldset>
+    <legend>Power Component</legend>
+    <div style='width:50%; display: inline-block; vertical-align:top'>
+      <form (submit)='onSubmit()'>
+        <h1>Initial Power Level:
+        <input type="number" name="powerLevel" min='0' value='0' [(ngModel)]="fighter.powerLevel">
+        <input type="submit" value="Calculate Power"> </h1>
+      </form>
+    </div>
+    <div style='width:50%; display: inline-block; vertical-align:top; text-align:right'>
+    <img src='https://78.media.tumblr.com/35be151184e2a4eb277e242cf3d5a1e5/tumblr_nq9ywtWJpF1rwxvn2o1_250.gif'>
+    </div>
+    <div class='dRow' style='margin: auto; width: 90%'>
+      <app-fighter-sub 
+      *ngFor='let fighter of fighters' 
+      [fighter]='fighter.class' 
+      [pwrLvl]='fighter.powerLevel'
+      [msg]='fighter.pwrMsg'></app-fighter-sub>
+    </div>
+  </fieldset>
+</div>

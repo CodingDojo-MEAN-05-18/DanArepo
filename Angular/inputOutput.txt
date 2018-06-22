@@ -1,0 +1,53 @@
+//input
+
+Parent.ts//
+
+//create var in export class section
+notes = thing;
+
+parent.html//
+{{ notes | json }} // displays var 
+
+<app-nested-comp [inputNote]="notes"></app0-nested-comp>
+//add in [inputNote]="var name in quotes" so that it sends data to the child
+
+Child.ts//
+
+//add Input to import list
+import { Component, OnInit, Input } from '@angular/core';
+
+//add @Input() varName into export class section 
+@Input() inputNote;
+//var name needs to be var name from parent html
+
+Child.html//
+{{ myNotes | json }}
+//var name needs to be what you put in the child export class
+
+//
+Output
+//
+
+Child.ts//
+//add in Output and EventEmitter - ass we will send the output through an event 
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
+//add in @Output in the export class section, under @Input
+@Output() outEvent = new EventEmitter(); - this uses the event emitter 
+
+//create method for calling parent 
+callParent() {
+    this.outEvent.emit();
+}
+
+Child.html//
+//add in a button that fires the event 
+<button (click)="callParent()">Call Parent</button>
+
+
+Parent.html//
+
+//change
+<app-nested-note [inputNote]='notes'></app-nested-note>
+//to
+ <app-nested-note [inputNote]='notes' (outEvent)="invoke()"></app-nested-note>

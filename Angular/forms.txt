@@ -1,0 +1,317 @@
+When building apps with forms, import 'FormsModule' into your appModule file
+//instructions on how to do this go here//
+
+make a new project
+//ng new angular-forms - makes a new project called angular-forms
+
+create a model class for your form - in this case 'hero'
+//ng generate class Hero
+throw in this code
+
+ts//
+export class Hero {
+    constructor(
+        public id: number,
+        public nbame: string,
+        public power: string,
+        public alterEgo?: string //? means it doesn't have to be populated - can be null
+    ) { }
+}
+//create a new hero instance like so
+let myHero = new Hero(42, 'SkyDog', 'Fetch', 'Leslie');
+console.log('name: ' + myHero.name);
+
+create a form component
+//ng generate component HeroForm
+
+ts//
+import { Component } from '@angular/core';
+
+import { Hero }    from '../hero';//thats how you import new modules, how has this not been said before
+
+@Component({
+  selector: 'app-hero-form',
+  templateUrl: './hero-form.component.html',
+  styleUrls: ['./hero-form.component.css']
+})
+export class HeroFormComponent {
+
+  powers = ['Really Smart', 'Super Flexible',
+            'Super Hot', 'Weather Changer'];
+
+  model = new Hero(18, 'Dr IQ', this.powers[0], 'Chuck Overstreet');
+
+  submitted = false;
+
+  onSubmit() { this.submitted = true; }
+
+  // TODO: Remove this when we're done
+  get diagnostic() { return JSON.stringify(this.model); }
+}
+
+Revise the app.module.ts
+
+ts//
+import { NgModule }      from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule }   from '@angular/forms';//this is needed for all forms to actually work
+
+import { AppComponent }  from './app.component';
+import { HeroFormComponent } from './hero-form/hero-form.component';
+
+@NgModule({
+  imports: [
+    BrowserModule,
+    FormsModule//import the new component
+  ],
+  declarations: [
+    AppComponent,
+    HeroFormComponent
+  ],
+  providers: [],
+  bootstrap: [ AppComponent ]
+})
+export class AppModule { }
+
+Revise app.component.html
+
+html//
+<app-hero-form></app-hero-form>
+
+Create an initial html template
+
+html//
+
+<div class="container">
+    <h1>Hero Form</h1>
+    <form>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="alterEgo">Alter Ego</label>
+        <input type="text" class="form-control" id="alterEgo">
+      </div>
+
+      <button type="submit" class="btn btn-success">Submit</button>
+
+    </form>
+</div>
+
+
+
+//instruction end//
+
+two way binding
+
+ts//
+
+import { Component } from '@angular/core';
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  user = { email:'' };
+}
+
+
+html//
+
+<form (submit)="onSubmit()">
+  <input type="text" name="email" [(ngModel)]="user.email">
+  <input type="submit">
+</form>
+
+
+submitting the form
+
+ts//
+
+import { Component } from '@angular/core';
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  user = { email:'' };
+  users = [];
+  onSubmit(){
+    users.push(this.user);
+    this.user = { email:'' };
+  }
+}
+
+
+html//
+
+<form (submit)="onSubmit()">
+  <input type="text" name="email" [(ngModel)]="user.email">
+  <input
+  type="submit">
+</form>
+
+
+Validations
+
+html//
+
+<input
+  type="text"
+  name="email"
+  required
+  minlength="4"
+  maxlength="24"
+  [(ngModel)]="user.email"
+  #email="ngModel"
+>
+{{ email.errors | json }}// needs to be .errors else errors may arise
+{{ email.valid | json }}//same with .valid
+
+Built in classes for validation
+
+css//
+
+.ng-valid { } # is set if the form control is valid.
+.ng-invalid { } # is set if the form control is invalid.
+.ng-pristine { } # is set if the form control has not been changed and pristine.
+.ng-dirty { } # is set if the form control has been changed and dirty.
+.ng-touched { } # is set if the form control has been visited.
+.ng-untouched { } # is set if the form control has not been visited.
+
+validation styling
+
+ts//
+
+import { Component } from '@angular/core';
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  user = {
+    username: '',
+    password: ''
+  };
+}
+
+css//
+
+import { Component } from '@angular/core';
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  user = {
+    username: '',
+    password: ''
+  };
+}
+
+
+html//
+
+<form>
+  <input
+    type="text"
+    name="username"
+    [(ngModel)]="user.username"
+    #username="ngModel"
+    required
+  />
+  <input
+    type="password"
+    name="password"
+    [(ngModel)]="user.password"
+    #password="ngModel"
+    required
+  />
+</form>
+
+registration form example
+
+ts//
+
+in a new class file - users.ts
+
+export class User {
+  constructor(
+    public id: number = null,
+    public first_name: string = "",
+    public last_name: string = "",
+    public email: string = "",
+    public password: string = "",
+    public created_at: Date = new Date(),
+    public updated_at: Date = new Date()
+  ){}
+}
+
+in main app.component.ts
+
+import { Component } from '@angular/core';
+import { User } from './user';
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  user = new User();
+  users = [];
+  onSubmit(){
+    this.users.push(this.user);
+    this.user = new User();
+  }
+}
+
+html//
+
+<form (submit)="onSubmit()">
+  <input
+    type="text"
+    name="email"
+    required
+    minlength="4"
+    maxlength="24"
+    [(ngModel)]="user.email"
+    #email='ngModel'
+  />
+  <input
+    type="text"
+    name="first_name"
+    required
+    minlength="4"
+    maxlength="24"
+    [(ngModel)]="user.first_name"
+    #first_name='ngModel'
+  />
+  <input
+    type="text"
+    name="last_name"
+    required
+    minlength="4"
+    maxlength="24"
+    [(ngModel)]="user.last_name"
+    #last_name='ngModel'
+  />
+  <input
+    type="text"
+    name="password"
+    required
+    minlength="10"
+    maxlength="24"
+    pattern="^([a-zA-Z0-9@*#]{8,15})$"
+    [(ngModel)]="user.password"
+    #password='ngModel'
+  />
+  <input type="submit">
+</form>
+
+

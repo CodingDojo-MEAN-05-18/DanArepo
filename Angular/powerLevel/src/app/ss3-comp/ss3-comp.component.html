@@ -1,0 +1,9 @@
+<fieldset style='display:inline-block; height: 200px; width: 30%'>
+  <legend>SuperSaiyanLvl3Component</legend>
+  Power Level: {{ inputPL * 250 }}<br>
+  <div style='height:300px'>
+      <div *ngIf="(inputPL * 250) >= 9000 && (inputPL * 250) < 20000" > <h2>OVER 9000!!!!!</h2></div>
+      <div *ngIf="(inputPL * 250) >= 20000 && (inputPL * 250) < 50000" > <h2>Superlative!!!!!</h2></div>
+      <div *ngIf="(inputPL * 250) >= 50000" > <h2>The ONE!!!!!</h2></div>
+    </div>
+</fieldset>

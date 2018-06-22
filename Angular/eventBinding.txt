@@ -1,0 +1,29 @@
+html
+//
+<button (click)='onButtonClick()'>Click</button>
+//
+ts goes into the component class
+//
+onButtonClick() {
+    //code goes here
+}
+//
+
+passing params
+html
+//
+<button (click)='onButtonClick(5)'>Click</button>
+<button (click)='onButtonClick('hiya')'>Click</button>
+//
+ts
+//
+onButtonClick(num: number || str: string) {
+    //do stuff with params
+}
+
+passing events
+html
+//
+<button (click)='onButtonClick($event)'>Click</button>
+//
+

@@ -1,0 +1,18 @@
+<fieldset>
+  <legend>PowerComponent</legend>
+  <form (submit)='onSubmit()'>
+    <h1>Initial Power Level:
+      <input type="number" name="powerLevel" min='0' value='0' [(ngModel)]="fighter.powerLevel">
+      <input type="submit" value="Calculate Power"> </h1>
+  </form>
+  <div id='row1' class='row'>
+    <app-main-comp [inputPL]='fighter.powerLevel'></app-main-comp>
+    <app-saiyan-comp [inputPL]='fighter.powerLevel'></app-saiyan-comp>
+    <app-super-saiyan-comp [inputPL]='fighter.powerLevel'></app-super-saiyan-comp>
+  </div>
+  <div id='row1' class='row'>
+    <app-ss2-comp [inputPL]='fighter.powerLevel'></app-ss2-comp>
+    <app-ss3-comp [inputPL]='fighter.powerLevel'></app-ss3-comp>
+    <app-ss4-comp [inputPL]='fighter.powerLevel'></app-ss4-comp>
+  </div>
+</fieldset>

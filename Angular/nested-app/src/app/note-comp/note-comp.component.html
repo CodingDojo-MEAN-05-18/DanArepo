@@ -1,0 +1,5 @@
+<p>
+  note-comp works!
+  {{ notes | json }}
+</p>
+<app-nested-note [inputNote]='notes' (outEvent)="invoke()"></app-nested-note>

@@ -1,0 +1,43 @@
+//
+installation
+//
+
+ng new app-name
+cd app-name
+ng generate component main-comp
+cd src
+cd app 
+cd main-comp 
+ng generate component child-comp1
+ng generate component child-comp2
+ng generate service service-name 
+
+place nested comps within the main comp dir to keep things orderly
+
+adjust html files to display comp tags
+take whats written in the selector field of @component  
+and put it in gator braces: <app-main-comp></app-main-comp>
+
+do the same for any nested comps in their parent html files
+
+//
+apps.modules.ts 
+//
+in the app folder 
+check the file to make sure your new comps are in the declarations
+usually they happen automatically but still
+
+//
+services overview 
+//
+
+they move data around a feature area or app
+share stateful in-memory data
+
+//
+@input and @output
+//
+
+@input - sends data from parent to child 
+@output - sends data from child to parent 
+
