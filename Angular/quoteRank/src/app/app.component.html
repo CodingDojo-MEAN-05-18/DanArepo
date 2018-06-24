@@ -1,0 +1,17 @@
+<div id='quoteContainer' style='width:50%'>
+  <h1>Add a Quote</h1>
+  <form (submit)='onSubmit()' style='text-align: right'>
+    <textarea [(ngModel)]='quote.quote' rows='5' cols='60' name='quote' required></textarea>
+    <br>
+    Author: <input type='text' [(ngModel)]='quote.author' name='author' required>
+    <br>
+    <input type='submit'>
+  </form>
+</div>
+<app-quote-comp 
+  *ngFor='let quote of quotes' 
+  [quote]='quote.quote' 
+  [author]='quote.author' 
+  [votes]='quote.votes'
+  [id]='quote.id'
+  (outEvent)='invoke($event)'></app-quote-comp>

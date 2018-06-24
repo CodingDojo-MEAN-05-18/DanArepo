@@ -1,0 +1,28 @@
+<div  style='border: black 5px solid; padding: 10px; text-align:center'>
+  <div id='quote' style='
+    width:50%;
+    display:inline-block; 
+    vertical-align: middle'>
+    <p id='quote' style='text-align:left'>
+      {{ quote }}
+      <br>
+      - {{ author }}
+    </p>
+  </div>
+  <div id='votes' style='
+    display:inline-block; 
+    width:15%; 
+    vertical-align: middle'>
+    <h2>{{ votes }}</h2>
+  </div>
+  <div id='voteButtons' style='
+    display:inline-block; 
+    width:25%; 
+    margin:auto; 
+    vertical-align: middle'>
+    <button style='width:200px' (click)='upVote($event)'>UpVote</button>
+    <br>
+    <button style='width:200px' (click)='downVote($event)'>DownVote</button>
+    <br>
+    <button style='width:200px' (click)='delete($event)'>Delete</button>
+</div>

@@ -2,6 +2,9 @@
 installation
 //
 
+//install angular in general
+npm install -g @angular/cli 
+
 ng new app-name
 cd app-name
 ng generate component main-comp

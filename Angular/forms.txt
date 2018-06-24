@@ -1,54 +1,6 @@
 When building apps with forms, import 'FormsModule' into your appModule file
 //instructions on how to do this go here//
 
-make a new project
-//ng new angular-forms - makes a new project called angular-forms
-
-create a model class for your form - in this case 'hero'
-//ng generate class Hero
-throw in this code
-
-ts//
-export class Hero {
-    constructor(
-        public id: number,
-        public nbame: string,
-        public power: string,
-        public alterEgo?: string //? means it doesn't have to be populated - can be null
-    ) { }
-}
-//create a new hero instance like so
-let myHero = new Hero(42, 'SkyDog', 'Fetch', 'Leslie');
-console.log('name: ' + myHero.name);
-
-create a form component
-//ng generate component HeroForm
-
-ts//
-import { Component } from '@angular/core';
-
-import { Hero }    from '../hero';//thats how you import new modules, how has this not been said before
-
-@Component({
-  selector: 'app-hero-form',
-  templateUrl: './hero-form.component.html',
-  styleUrls: ['./hero-form.component.css']
-})
-export class HeroFormComponent {
-
-  powers = ['Really Smart', 'Super Flexible',
-            'Super Hot', 'Weather Changer'];
-
-  model = new Hero(18, 'Dr IQ', this.powers[0], 'Chuck Overstreet');
-
-  submitted = false;
-
-  onSubmit() { this.submitted = true; }
-
-  // TODO: Remove this when we're done
-  get diagnostic() { return JSON.stringify(this.model); }
-}
-
 Revise the app.module.ts
 
 ts//
@@ -72,35 +24,6 @@ import { HeroFormComponent } from './hero-form/hero-form.component';
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
-
-Revise app.component.html
-
-html//
-<app-hero-form></app-hero-form>
-
-Create an initial html template
-
-html//
-
-<div class="container">
-    <h1>Hero Form</h1>
-    <form>
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" required>
-      </div>
-
-      <div class="form-group">
-        <label for="alterEgo">Alter Ego</label>
-        <input type="text" class="form-control" id="alterEgo">
-      </div>
-
-      <button type="submit" class="btn btn-success">Submit</button>
-
-    </form>
-</div>
-
-
 
 //instruction end//
 
@@ -141,7 +64,7 @@ export class AppComponent {
   user = { email:'' };
   users = [];
   onSubmit(){
-    users.push(this.user);
+    this.users.push(this.user);
     this.user = { email:'' };
   }
 }
