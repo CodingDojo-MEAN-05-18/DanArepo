@@ -1,0 +1,8 @@
+div {
+    display:inline-block;
+    padding: 10px;
+}
+#container {
+    border: black solid 1px;
+    margin: auto;
+}

@@ -1,0 +1,13 @@
+<div id='container'>
+<div>
+<h1>GitHub Score Calculator</h1>
+<form (submit)='onSubmit()'>
+  Username: <input type='text' [(ngModel)]='user.username' name='username'><br>
+  <input type='submit' value='Calculate my GitHub Score'>
+</form>
+</div>
+<div style='text-align:right'>
+<h1>results go here</h1>
+<h2>message goes here</h2>
+</div>
+</div>

@@ -7,10 +7,15 @@ import { NinjaGoldService } from '../ninja-gold.service';
   styleUrls: ['./log-comp.component.css']
 })
 export class LogCompComponent implements OnInit {
-  msgLog: string[] = this._dataService.msgLog;
+  msgLog: string[] = []];
+  getLog():void {
+    this._dataService.getLog()
+      .subscribe(msgLog => this.msgLog = msgLog);
+  }
   constructor(private _dataService: NinjaGoldService) { }
 
   ngOnInit() {
+    this.getLog();
   }
 
 }

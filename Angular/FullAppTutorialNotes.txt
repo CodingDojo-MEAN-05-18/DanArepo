@@ -1,0 +1,111 @@
+//install angular
+npm i @angular/cli
+
+//make a new app
+ng new angular-tour-of-heroes
+cd angular-tour-of-heroes 
+
+//start the app
+ng serve --open //nifty shortcut to open a browser to the page 
+
+//change the title by variable manipulation 
+
+//in app.component.ts
+title = 'Tour of Heroes';
+
+//in app.component.html (template)
+<h1>{{ title }}</h1>
+
+//watch as title becomes Tour of Heroes 
+//yay variables
+
+//adding app styles
+
+//src/styles.css
+
+//put your app wide style changes here 
+
+//lets create some heroes 
+
+//make some components
+ng g c heroes 
+ng g c hero-detail
+ng g c messages
+
+//inside of heroes.ts 
+
+//inside of heroes.html
+
+//inside of hero-detail.ts 
+
+//inside of hero-detail.html
+
+//inside of messages.ts 
+
+//inside of messages.html 
+
+//inside of app.component.ts 
+
+//inside of app.component.html 
+
+
+//make a class and fake database
+//create a file called hero.ts 
+export class Hero {
+    id: number;
+    name:string;
+}
+//create a file called mock-heroes.ts 
+import { Hero } from './hero';//import the class of data you want to use for your db
+
+export const HEROES: Hero[] = [//follow the pattern
+{ id: 11, name: 'Mr. Nice' },
+  { id: 12, name: 'Narco' },
+  { id: 13, name: 'Bombasto' },
+  { id: 14, name: 'Celeritas' },
+  { id: 15, name: 'Magneta' },
+  { id: 16, name: 'RubberMan' },
+  { id: 17, name: 'Dynama' },
+  { id: 18, name: 'Dr IQ' },
+  { id: 19, name: 'Magma' },
+  { id: 20, name: 'Tornado' },
+]
+
+//Make a some services to handle data across the app 
+ng g s hero - for hero data 
+ng g s message - for messages
+
+//inside of hero.service.ts 
+import { Injectable } from '@angular/core';
+import { Hero } from './hero';
+import { HEROES } from './mock-heroes';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class HeroService {
+  getHeroes(): Hero[] {
+    return HEROES;
+  }
+
+  constructor() { }
+}
+
+//changing the service from event driven to an open stream with observables
+//in your chosen service - this is hero.service.ts 
+...
+import { Observable, of } from 'rxjs';
+...
+//change your get method to something like this...
+getHeroes(): Observable<Hero> {
+    return of(HEROES);
+}
+
+//now the service will display changes to the db in real time
+//to get them to work in your components...
+//in your component - heroes.component for this one 
+//change its get method...
+getHeroes(): void {
+    this.heroService.getHereos()
+        .subscribe(heroes => this.heroes = heroes);
+}

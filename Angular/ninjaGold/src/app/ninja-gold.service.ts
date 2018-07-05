@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs'; 
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +20,12 @@ export class NinjaGoldService {
     this.msg += num + " gold at the " + place + "!";
     this.msgLog.push(this.msg);
   }
-  retrieveGold(): number {
-    console.log('at service: ',this.goldCount);
-    return this.goldCount;
+  retrieveGold(): Observable<number> {
+    console.log('at service: ', this.goldCount);
+    return of(this.goldCount);
+  }
+  getLog(): Observable<string[]> {
+    return of(this.msgLog);
   }
   constructor() { }
 }

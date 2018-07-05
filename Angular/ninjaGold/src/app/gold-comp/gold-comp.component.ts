@@ -7,11 +7,6 @@ import { NinjaGoldService } from '../ninja-gold.service';
   styleUrls: ['./gold-comp.component.css']
 })
 export class GoldCompComponent implements OnInit {
-  myGold: number = this._dataService.goldCount;
-  update() {
-    this.myGold = this._dataService.retrieveGold();
-    console.log('at Gold Comp: ', this._dataService.goldCount);
-  }
   constructor(private _dataService: NinjaGoldService) { }
 
   ngOnInit() {

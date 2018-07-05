@@ -1,0 +1,86 @@
+//install angular
+npm i @angular/cli
+
+//create new project
+ng new app-name
+
+//create components and a service
+ng g c component-name-alpha
+ng g c component-name-beta
+ng g s service-name 
+
+//modify app.modules.ts
+...import your service and formsModule...
+import { service-name } from './servicename.service';
+import {FormsModule } from '/@angular/Forms';
+...put the FormsModule into the imports category...
+imports: [
+    ...
+    FormsModule,
+    ...
+]
+...put the service into the providers category...
+providers: [service-name],
+...
+
+//register the service to all components that you want to connect together
+...
+import { service-name } from '../service.service';
+...
+export class ...
+constructor(private _dataService: service-name) { }
+...
+
+//implement the behaviorsubject in the service.ts 
+...
+import { BehaviorSubject } from 'Rxjs';//Copy and paste this
+...
+export class ...
+data-var: BehaviorSubject<any[]> = new BehaviorSubject([]);
+//service stores any data as an array of data-var
+...
+updateData(newData: any): void {
+    this.data-var.next(newData);
+    //updateData method passes new data into data-var array. think of it like .push() 
+}
+
+//make a collection point for data in component-alpha.ts
+...
+export class ...
+alphaData: any[] = [];
+//make an array var (data) to collect the data
+...
+ngOnInit() {
+    this._dataService.data-var.subscribe(//sets the BehaviorSubject to track any changes in (alphaData)...
+        (alphaData) => {//by passing (alphaData)...
+            this.data-var = data;//into data-var
+        }
+    );
+}
+
+//create a form to collect the data in comp-alpha.html
+<form (submit)='onSubmit()'>
+    <input type='text' name='data' [(ngModel)]='data'/>
+    <input type='submit'>
+</form> 
+
+//Lecture Notes
+// in service.ts 
+export class...
+...
+//method to get data 
+getData() {
+
+}
+
+//in components 
+import service 
+add an aray for the data to be saved locally
+
+in constructor 
+inject the service 
+private serviceName: serviceName,
+
+in ngOnInit 
+this.data = this.serviceName.getData();
+
